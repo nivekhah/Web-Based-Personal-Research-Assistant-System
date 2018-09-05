@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>生成论文报表</title>
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="0">
+<meta charset="utf-8">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.3.1.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+<style>
+    select {
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: solid 1px #000;
+
+  /*很关键：将默认的select选择框样式清除*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+
+  /*在选择框的最右侧中间显示小箭头图片*/
+  background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+
+
+  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+  padding-right: 14px;
+
+}
+        .menu{
+            position:absolute;
+            right:0px;
+            top:0px;
+            font:1em helvetica,arial,sans-serif;
+            z-index: 1000;
+        }
+
+        .menu a{
+            display: block;
+            border-width: 3px;
+            border-color: transparent;
+        }
+        .menu a:hover{
+        }
+
+        .menu a:active{
+        }
+        .menu * {
+            margin: 0;
+            padding: 0;
+        }
+        .menu ul{
+            float: left;
+        }
+        .menu li{
+            float: left;
+            list-style-type: none;
+            position: relative;
+        }
+        .menu li a{
+            display: block;
+            border-right-style: solid;
+            background-clip: padding-box;
+            text-decoration: none;
+        }
+        .menu li:last-child a{
+            border-right-style: none;
+        }
+        .menu li ul {
+            width: 9em;
+        }
+        .menu li li a{
+            border-right-style: none;
+            border-top-style: solid;
+        }
+        .menu li ul{
+            display: none;
+            position: absolute;
+            left: 0;
+            top:100%;
+        }
+        .menu li li{
+            float: none;
+        }
+        .menu li li ul{
+            display: none;
+        }
+        .menu li:hover > ul{
+            display: block;
+        }
+        .menu li li ul{
+            position: absolute;
+            left: 102%;
+            top: 0;
+        }
+</style>
+</head>
+<body onload="load()">
+<div id="main_div">
+    <div id="menu" style="height: 30px;width: 100%;background-color: #0099cc" >
+        <a style="position: absolute;top: 3px;right: 5px" onclick="window.location.href='/'">Home</a>
+    </div>
+    <div style="height: 100px"></div>
+    <div style="height: 40px">
+        <div style="height: 100%" class="col-xs-2">
+        </div>
+        <div class="col-xs-8" style="height: 100%;">
+            <input type="checkbox" id="first" name="first">期刊
+            <input type="checkbox" id="second" name="second">会议
+            <input style="height: 80%;width: 9%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="增加列" onclick="addcol()">
+            <input style="height: 80%;width: 9%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="删除列" onclick="delcol()">
+            <input style="height: 80%;width: 9%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="提交" onclick="Submit()">
+            <ul class="menu">
+                <li>
+                    <a href="#">导出</a>
+                    <ul>
+                        <li><a href="#" onclick="one()">导出为.docx</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="two()">导出为.csv</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--<a onclick="show()" style="position:absolute; right: 18px; top: 5px;">排序</a>-->
+        </div>
+        <div style="height: 100%" class="col-xs-2"></div>
+    </div>
+    <div style="height: 70px">
+        <div id="show" style="height: 100%">
+            <div style="height: 100%" class="col-xs-2"></div>
+            <div style="height: 100%" class="col-xs-8">
+                <div style="height: 100%" class="col-xs-4">
+                <p style="font-weight:bold;">主要关键字</p>
+                <select id="firstselect" style="height: 50%;width: 100%"  onchange="select(this)" onclick="show()">
+                    <option id="first0" value="" style="display: none"></option>
+                    <option id="first1" value="" style="display: none"></option>
+                    <option id="first2" value="" style="display: none"></option>
+                    <option id="first3" value="" style="display: none"></option>
+                    <option id="first4" value="" style="display: none"></option>
+                    <option id="first5" value="" style="display: none"></option>
+                </select>
+            </div>
+            <div style="height: 100%" class="col-xs-4">
+                <p style="font-weight:bold;">次要关键字</p>
+                <select id="secondselect" style="height: 50%;width: 100%" onchange="select(this)" onclick="show()">
+                    <option id="second0" value="" style="display: none"></option>
+                    <option id="second1" value="" style="display: none"></option>
+                    <option id="second2" value="" style="display: none"></option>
+                    <option id="second3" value="" style="display: none"></option>
+                    <option id="second4" value="" style="display: none"></option>
+                    <option id="second5" value="" style="display: none"></option>
+                </select>
+            </div>
+            <div style="height: 100%" class="col-xs-4">
+                <p style="font-weight:bold;">第三关键字</p>
+                <select id="thirdselect" style="height: 50%;width: 100%" onchange="select(this)" onclick="show()">
+                    <option id="third0" value="" style="display: none"></option>
+                    <option id="third1" value="" style="display: none"></option>
+                    <option id="third2" value="" style="display: none"></option>
+                    <option id="third3" value="" style="display: none"></option>
+                    <option id="third4" value="" style="display: none"></option>
+                    <option id="third5" value="" style="display: none"></option>
+                </select>
+            </div>
+            </div>
+            <div style="height: 100%" class="col-xs-2"></div>
+        </div>
+    </div>
+
+    <div style="height: 200px" id="mydiv">
+        <div style="height: 100%" class="col-xs-2">
+            <p id="author1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Author</p>
+            <p id="title1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Title</p>
+            <p id="journal1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Journal</p>
+            <p id="year1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Year</p>
+            <p id="volume1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Volume</p>
+            <p id="number1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Number</p>
+            <p id="pages1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Pages</p>
+            <p id="author_order1" draggable="true" ondragstart="myondragstart(event)" ondrag="myondrag(event)" ondragend="myondragend(event)">Author Order</p>
+        </div>
+        <div class="col-xs-8" style="border: 1px #b3b8c2 solid;height: 100%;" id="d" ondragenter="myondragenter(event)" ondragleave="myondragleave(event)" ondrop="myondrop(event)" ondragover="myondragover(event)">
+            <table frame="border" rules="all" id="mytable">
+                <!--<caption>测试表</caption>-->
+                <tr>
+                </tr>
+                </table>
+        </div>
+        <div style="height: 100%" class="col-xs-2"></div>
+    </div>
+    <div style="height: 80px"></div>
+</div>
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myconfirm">
+					关键字排序
+				</h4>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" onclick="confirm()">
+					确定
+				</button>
+			</div>
+		</div>
+	</div>
+</div>-->
+<script>
+    var username="{{ username }}";
+    var column = 0;
+    var showarray = new Array();
+    $(document).ready(function(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+        });
+   // window.setInterval('show()',500);
+    function show() {
+        //$('#myModal').modal('show');
+        var Columns = new Array();
+    for(var i = 0;i<column;i++){
+        var temp = document.getElementById('id'+i).innerText;
+        if(temp[temp.length-1]=='\n'){
+            temp = temp.substring(0,temp.length-1)
+        }
+        Columns[i]=temp;
+    }
+    console.log(Columns);
+    showarray = Columns;
+    for(var i=0;i<column;i++){
+        document.getElementById('first'+i).innerText=Columns[i];
+        document.getElementById('second'+i).innerText=Columns[i];
+        document.getElementById('third'+i).innerText=Columns[i];
+        document.getElementById('first'+i).style.display = '';
+        document.getElementById('second'+i).style.display = '';
+        document.getElementById('third'+i).style.display = '';
+    }
+    var flag = 0;
+    for(var i=0;i<column;i++){
+        if(Columns[i]=='Year'){
+            flag=1;
+        }
+    }
+    console.log(flag);
+    if(flag==0){
+        document.getElementById('first'+i).innerText='Year';
+        document.getElementById('second'+i).innerText='Year';
+        document.getElementById('third'+i).innerText='Year';
+        document.getElementById('first'+i).style.display = '';
+        document.getElementById('second'+i).style.display = '';
+        document.getElementById('third'+i).style.display = '';
+    }
+    }
+    var order = new Array();
+    function confirm() {
+        var a = $("select[id='firstselect']").find("option:selected").text();
+        var b = $("select[id='secondselect']").find("option:selected").text();
+        var c = $("select[id='thirdselect']").find("option:selected").text();
+        if(a!=''){
+            order[0]=a;
+        }
+        if(b!=''){
+            order[1]=b;
+        }
+        if(c!=''){
+            order[2]=c;
+        }
+        //$('#myModal').modal('hide');
+    }
+    function select(e) {
+        //show();
+        console.log(e.id);
+        var ID = e.id;
+        //console.log(showarray);
+        var a = $("select[id="+ID+"]").find("option:selected").text();
+        //var b = $("select[id='secondselect']").find("option:selected").text();
+        //var c = $("select[id='thirdselect']").find("option:selected").text();
+        //showarray.remove(a);
+        console.log(a);
+        //console.log(showarray);
+        /*for(var i=0;i<6;i++){
+            document.getElementById('first'+i).style.display = 'none';
+            document.getElementById('second'+i).style.display = 'none';
+            document.getElementById('third'+i).style.display = 'none';
+        }*/
+        /*for(var i=0;i<showarray.length;i++){
+            document.getElementById('first'+i).innerText=showarray[i];
+            document.getElementById('second'+i).innerText=showarray[i];
+            document.getElementById('third'+i).innerText=showarray[i];
+            document.getElementById('first'+i).style.display = '';
+            document.getElementById('second'+i).style.display = '';
+            document.getElementById('third'+i).style.display = '';
+        }*/
+    }
+    Array.prototype.indexOf = function(val) {
+        for (var i = 0; i < this.length; i++) {
+        if (this[i] == val)
+            return i;
+        }
+        return -1;
+    };
+    Array.prototype.remove = function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+        this.splice(index, 1);
+        }
+    };
+    //载入默认选项框为空白，点击下拉框显示正常选项.
+    function load()
+    {
+        var x = document.getElementById("firstselect");
+        x.selectedIndex = -1;
+        var x = document.getElementById("secondselect");
+        x.selectedIndex = -1;
+        var x = document.getElementById("thirdselect");
+        x.selectedIndex = -1;
+    }
+/*$(document).ready(function(){
+    $(".author").hide();
+    $(".title").hide();
+    $(".journal").hide();
+    $(".year").hide();
+    $(".volume").hide();
+    $(".number").hide();
+    $(".pages").hide();
+});*/
+
+function myondragenter(ev) {
+}
+
+function myondragover(ev){
+    ev.preventDefault();
+}
+
+function myondragleave(ev) {
+}
+var weight = new Array();
+
+//Year, Volume(Number)
+function myondrop(ev){
+    console.log("释放");
+    ev.preventDefault();
+    var data=ev.dataTransfer.getData("Text");
+    console.log(data);
+    console.log(ev.target.id);
+    var num = Number(ev.target.id.split('id')[1]);
+    console.log(num);
+    if(ev.target.id!='d'){
+
+        if(document.getElementById(ev.target.id).innerText == 'Click edit'){
+            document.getElementById(ev.target.id).innerText=document.getElementById(data).innerText;
+        }
+        else{
+            document.getElementById(ev.target.id).innerText=document.getElementById(ev.target.id).innerText+' '+document.getElementById(data).innerText;
+        }
+        if(document.getElementById(ev.target.id).innerText == 'Author'){
+            weight[num] = 4;
+        }
+        else if(document.getElementById(ev.target.id).innerText == 'Title'){
+            weight[num] = 4;
+        }
+        else if(document.getElementById(ev.target.id).innerText == 'Journal'){
+            weight[num] = 3;
+        }
+        else if(document.getElementById(ev.target.id).innerText == 'Year'){
+            weight[num] = 1;
+        }
+        else if(document.getElementById(ev.target.id).innerText == 'Number'){
+            weight[num] = 1;
+        }
+        else if(document.getElementById(ev.target.id).innerText == 'Pages'){
+            weight[num] = 1;
+        }
+        else if(document.getElementById(ev.target.id).innerText == 'Author Order'){
+            weight[num] = 2;
+        }
+        else{
+            weight[num] = 2;
+        }
+
+
+        var sum = weight.sum();
+
+    }
+
+
+    for(var i = 0; i<column;i++){
+        document.getElementById('id'+i).width = (document.documentElement.clientWidth*weight[i]*2)/(sum*3)+'px';
+    }
+
+
+
+    /*if(data=='author1'){
+        document.getElementById('Author').style.display='';
+        $(".author").show();
+    }
+    else if(data=='title1'){
+        document.getElementById('Title').style.display='';
+        $(".title").show();
+    }
+    else if(data=='journal1'){
+        document.getElementById('Journal').style.display='';
+        $(".journal").show();
+    }
+    else if(data=='year1'){
+        document.getElementById('Year').style.display='';
+        $(".year").show();
+    }
+    else if(data=='volume1'){
+        document.getElementById('Volume').style.display='';
+        $(".volume").show();
+    }
+    else if(data=='number1'){
+        document.getElementById('Number').style.display='';
+        $(".number").show();
+    }
+    else if(data=='pages1'){
+        document.getElementById('Pages').style.display='';
+        $(".pages").show();
+    }
+    document.getElementById(data).style.display='none';*/
+
+    //ev.target.appendChild(document.getElementById(data));
+}
+
+Array.prototype.sum = function (){
+ var result = 0;
+ for(var i = 0; i < this.length; i++) {
+  result += this[i];
+ }
+ return result;
+};
+function myondragstart(ev){
+    console.log("开始移动"+ev.target.id)
+    ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function myondrag(ev){
+    //console.log("正在移动"+ev.target.id)
+}
+
+function myondragend(ev) {
+    console.log("结束移动"+ev.target.id)
+}
+
+
+function addrow(columns,data){
+    var c=document.getElementById('mytable');//获得表格的信息
+    if( c.rows.length==0){//如果是向一个空表增加一行
+        var x=c.insertRow(0);//向空表插入一行
+        var y=x.insertCell(0);//向新行插入一列
+        y.innerHTML="new cell0";
+    }
+    else{
+        var z=c.rows[0].cells;//如果不是空表，首先获得表格有多少列，先获取再插入新行
+        var len=c.rows.length;//获得行数
+        var x=c.insertRow(len);
+        //console.log(z.length);
+        for(
+            var i=0;i<z.length;i++){//依次向新行插入表格列数的单元格
+            var y = x.insertCell(i);
+            y.align='center';
+            //console.log(i)
+            //console.log(y)
+            //console.log(data[columns[i].toLowerCase()]);
+            y.innerHTML=data[columns[i].toLowerCase()];
+        }
+    }
+}
+function delrow(){
+    var x=document.getElementById("mytable");
+    var len=x.rows.length;//获得行数
+    //console.log(len)
+    if(len!=1){
+        for(var i = len-1;i>0;i--){
+         x.deleteRow(i);//删除一行
+    }
+    }
+
+
+}
+function addcol(){
+    var c=document.getElementById('mytable');//获取表格信息
+    var len=c.rows.length;//获得行数
+    var ro=c.rows[0].cells;
+    var len2=ro.length;//获得列数
+    column = len2 + 1;
+    for(var i=0;i<len;i++){
+        var x=c.rows[i].insertCell(len2);//依次向每一行的末尾插入一个新列
+        x.id='id'+len2;
+        x.contentEditable = true;
+        x.innerHTML='Click edit';
+        x.align='center';
+        x.ondrag = function(){myondrag(event)};
+    }
+    for(var i = 0; i<column;i++){
+        weight[i]=2;
+        document.getElementById('id'+i).width = (document.documentElement.clientWidth*2/3)/(column)+'px';
+    }
+    //x.width= (document.documentElement.clientWidth*2/3)/(column);
+    console.log(column);
+}
+function delcol(){
+    var c=document.getElementById('mytable');//获取表格信息
+    var len=c.rows.length;//获取表格的行数
+    var ro=c.rows[0].cells//获取表格的列数
+    var len2=ro.length-1;
+    for(var i=0;i<len;i++){
+        var x=c.rows[i].deleteCell(len2);//删除每一行末尾的单元格
+    }
+}
+/*$('input:radio').click(function(){
+                //alert(this.checked);
+                //
+
+                var domName = $(this).attr('name');
+
+                var $radio = $(this);
+                // if this was previously checked
+                if ($radio.data('waschecked') == true){
+                    $radio.prop('checked', false);
+                    $("input:radio[name='" + domName + "']").data('waschecked',false);
+                    //$radio.data('waschecked', false);
+                } else {
+                    $radio.prop('checked', true);
+                    $("input:radio[name='" + domName + "']").data('waschecked',false);
+                    $radio.data('waschecked', true);
+                }
+            });*/
+var mytime = '';
+function Submit() {
+    delrow();
+    confirm();
+    var x = $('input[id="first"]:checked').val();
+    var y = $('input[id="second"]:checked').val();
+    console.log(x)
+    console.log(y)
+    var types = 0;
+    if(x=='on' && y!='on'){
+        types=1;
+    }
+    else if(x!='on' && y=='on'){
+        types=2;
+    }
+    else{
+        types=3;
+    }
+    var Columns = new Array();
+    for(var i = 0;i<column;i++){
+        var temp = document.getElementById('id'+i).innerText;
+        if(temp[temp.length-1]=='\n'){
+            temp = temp.substring(0,temp.length-1)
+        }
+        Columns[i]=temp;
+    }
+    console.log(order);
+    $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+        $.getJSON($SCRIPT_ROOT+'/sendFormat', {
+            types: types,
+            Columns: JSON.stringify(Columns),
+            order: JSON.stringify(order)
+        }, function (data) {
+            document.getElementById('d').style.border ='1px #ffffff solid';
+            console.log(data)
+            mytime=data[1];
+            console.log(data[0]);
+            for(var i = 0;i<data[0].length;i++){
+                addrow(Columns,data[0][i]);
+            }
+            var SpaceObj=document.getElementById('mytable');
+            document.getElementById('mydiv').style.height=SpaceObj.clientHeight+'px';
+        });
+    console.log(Columns);
+}
+function one() {
+    window.location.href='http://'+window.location.host+'/download/file/'+username+'/'+'pubs'+mytime+'.docx';
+}
+function two() {
+    window.location.href='http://'+window.location.host+'/download/file/'+username+'/'+'publications'+mytime+'.csv';
+}
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,6 @@
+Flask==0.12.2
+Flask-Login==0.4.0
+mysql-python==1.2.5
+bibtexparser
+pinyin
+python-docx

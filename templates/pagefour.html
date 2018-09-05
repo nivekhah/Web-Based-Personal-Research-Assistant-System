@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建主页-添加论文</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.2.1.slim.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+</head>
+<body>
+<script src="../static/jquery-1.4.2.min.js"></script>
+<div id="main_div">
+    <div id="menu" style="height: 5%;width: 100%;background-color: #0099cc" >
+    </div>
+    <div id="choose" style="height: 20%;width: 100%;background-color: #ffffff">
+        <div class="col-xs-2" style="height: 100%">
+        </div>
+        <div class="col-xs-8" style="height: 100%">
+            <div class="col-xs-2" style="height: 100%;top: 45%">
+                <span >4.添加论文</span>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle1" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid" >
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle2" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle3" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle4" style="background-color:#edf4ff; border-radius:25px;border: 3px red solid" >
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle5" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <div style="height: 72%;width: 100%;">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div class="col-xs-8" style="height: 80%;border: 1px #b3b8c2 solid">
+            <div style="height: 20%;width: 100%;border-bottom: 1px solid #eee;">
+                <div class="col-xs-2" style="height: 100%;"></div>
+                <div class="col-xs-4" style="height: 100%;" >
+                    <div style="height: 30%"></div>
+                    <span style="font-size: 30px;font-weight: bold">添加论文</span>
+                </div>
+                <div class="col-xs-6" style="height: 100%;" >
+                    <!--<div style="height: 60%"></div>
+                    <div class="col-xs-4" style="height: 40%;" >
+                        <input type="button" value="复制Bibtex" style="height: 100%;width: 100%;background-color: #237ca4;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" onclick="copy()"/>
+                    </div>
+                    <div class="col-xs-4" style="height: 40%;" >
+                        <input type="button"  data-toggle="modal" data-target="#myModal" value="填写Bibtex" style="height: 100%;width: 100%;background-color: #237ca4;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" />
+                    </div>
+                    <div class="col-xs-4" style="height: 40%;" >
+                    </div>-->
+                </div>
+            </div>
+            <div style="height: 58%; " id="copy">
+                <div style="height: 10%;width: 100%">
+                </div>
+                <div class="col-xs-2" style="height: 80%">
+                </div>
+                <div class="col-xs-8" style="height: 80%">
+                    <div style="height: 24%"></div>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请选择您上传的Bibtex文件</span>
+                    <div style="height: 25%"></div>
+                    <form style="height: 100%" method='post' enctype='multipart/form-data' target="nm_iframe" >
+                        <div class="col-xs-9" style="height: 22%">
+                            <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="file" name="file">
+                        </div>
+                        <div class="col-xs-3" style="height: 22%">
+                            <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="submit" value="上传" >
+                        </div>
+                    </form>
+                    <div style="height: 20%"></div>
+                </div>
+                <div class="col-xs-2" style="height: 80%;top: 15%">
+                </div>
+                <div style="height: 10%;width: 100%"></div>
+            </div>
+            <div style="height: 15%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-3" style="height: 60%;top: 15%">
+                </div>
+                <div class="col-xs-6" style="height: 60%">
+                    <div class="col-xs-6" style="height: 100%">
+                        <input style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="上一步" onclick="before()">
+                    </div>
+                    <div class="col-xs-6" style="height: 100%">
+                        <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="下一步" onclick="next()">
+                    </div>
+                </div>
+                <div class="col-xs-3" style="height: 60%;top: 15%">
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+</div>
+<iframe id="nm_iframe" name="nm_iframe" style="display:none;"></iframe>
+<script type="text/javascript">
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',1*windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+            $('#circle1').css('height',0.05*windowHeight + "px");
+            $('#circle1').css('width',0.05*windowHeight+ "px");
+            $('#circle2').css('height',0.05*windowHeight + "px");
+            $('#circle2').css('width',0.05*windowHeight+ "px");
+            $('#circle3').css('height',0.05*windowHeight + "px");
+            $('#circle3').css('width',0.05*windowHeight+ "px");
+            $('#circle4').css('height',0.05*windowHeight + "px");
+            $('#circle4').css('width',0.05*windowHeight+ "px");
+            $('#circle5').css('height',0.05*windowHeight + "px");
+            $('#circle5').css('width',0.05*windowHeight+ "px");
+        }
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+	});
+    //点击下一步，先将首页的数据提交到后台，然后进行页面的跳转，点击上一步，可以跳转到前一面进行信息修改
+    function before() {
+        //跳转到页面一
+        window.location.href='pagethree';
+    }
+    function next() {
+        //跳转到页面三
+       /* $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/pagefourInfo', {
+          		text: document.getElementById("bibtexcopy").value
+        	}, function (data) {
+                if(data=='0'){
+                    window.location.href='pagefive';
+                }
+		    });*/
+        window.location.href='pagefive';
+    }
+    $('#nm_iframe').load(function(){
+    var text=$(this).contents().find("body").text();
+       // 根据后台返回值处理结果
+    var j=$.parseJSON(text);
+    console.log(j);
+    if(j=='0'){
+        alert('上传成功');
+    }
+    else if(j==null){
+
+    }
+    else{
+        alert('上传失败');
+    }
+});
+</script>
+</body>
+</html>

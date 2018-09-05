@@ -1,0 +1,57 @@
+首页可以罗列系统功能,每个功能都可以放在一个'透明框'里,图片加文字,图片左右分开
+
+realname
+EnglishRealname
+email
+researchField
+domainName
+researchInterest
+myself
+Research_institutions
+department
+position
+
+ProfilePicturePath
+
+bibtex  (json)
+
+
+insert into test value('
+{     
+	"animals": {         
+		"dog": [             
+			{                 
+				"name": "Rufus",                 
+				"age":15             
+			},             
+			{                 
+				"name": "Marty",                 
+				"age": null             
+			}         
+			] 
+		}
+	}'
+		);
+
+
+sudo apt-get install python-pip python-dev build-essential
+sudo pip install flask
+ pip install -r requirements.txt
+
+Year, Volume(Number)
+
+create table bibtex (username varchar(30),bibtex varchar(50),pdfpath varchar(100),FOREIGN KEY (username) REFERENCES user(email)) character set = utf8;
+
+create table bibtex (username varchar(30),bibtex varchar(50),pdfpath varchar(100),FOREIGN KEY (username) REFERENCES user(email),PRIMARY KEY (username,bibtex)) character set = utf8;
+
+create table people (realname varchar(30),EnglishRealname varchar(30),email varchar(30),username varchar(30),domainName varchar(30),researchInterest varchar(30),myself varchar(500),Research_institutions varchar(30),department varchar(30),position varchar(30),ProfilePicturePath varchar(50),bibtex json,FOREIGN KEY (username) REFERENCES user(email)) character set = utf8;
+
+create table people (realname varchar(30),EnglishRealname varchar(30),email varchar(30),username varchar(30) primary key,domainName varchar(30),researchInterest varchar(30),myself varchar(500),Research_institutions varchar(30),department varchar(30),position varchar(30),ProfilePicturePath varchar(50),FOREIGN KEY (username) REFERENCES user(email)) character set = utf8;
+
+
+首先修改数据库,加入主键和外键
+user原有结构
+id|email|name|idcard|phonenumber|password|unit
+create table user(id int,email varchar(30) primary key,name varchar(30),idcard varchar(30),phonenumber varchar(30),password varchar(200),unit varchar(100))  character set = utf8;
+
+create table user(id int,email varchar(30) primary key,name varchar(30),phonenumber varchar(30),password varchar(200))  character set = utf8;

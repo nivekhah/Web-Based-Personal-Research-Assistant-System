@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加论文</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.3.1.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+    <style>
+        li{ display:inline;
+        border:1px solid #0099cc;}
+        #menu li:hover {
+            background:#146C9C; /* 变换背景色 */
+            color:#fff; /* 变换文字颜色 */
+        }
+    </style>
+</head>
+<body>
+<div id="main_div">
+    <div id="menu" style="height: 5%;width: 100%;background-color: #0099cc" >
+        <a style="position: absolute;top: 5px;right: 6px" onclick="window.location.href='/'">Home</a>
+    </div>
+    <div style="height: 8%"></div>
+    <div style="height: 80%;width: 100%;">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div class="col-xs-8" style="height: 100%;border: 1px #b3b8c2 solid">
+            <div style="height: 12%;width: 100%;border-bottom: 1px solid #eee;">
+                <div class="col-xs-2" style="height: 100%;"></div>
+                <div class="col-xs-4" style="height: 100%;" >
+                    <div style="height: 30%"></div>
+                    <span style="font-size: 30px;font-weight: bold">选择论文</span>
+                </div>
+                <div class="col-xs-6" style="height: 100%;" >
+                    <div style="height: 30%"></div>
+                    <div class="col-xs-4" style="height: 40%;" >
+                        <input type="button" value="复制Bibtex" style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" onclick="copy()"/>
+                    </div>
+                    <div class="col-xs-4" style="height: 40%;" >
+                        <input type="button"  data-toggle="modal" data-target="#myModal" value="填写Bibtex" style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" />
+                    </div>
+                    <div class="col-xs-4" style="height: 40%;" >
+                    </div>
+                </div>
+            </div>
+            <div style="height: 63%;border-bottom: 1px solid #eee; " id="copy">
+                <div style="height: 10%;width: 100%">
+                </div>
+                <div class="col-xs-12" style="height: 85%">
+                    <textarea id="bibtexcopy" style="font-size: 14px;width: 100%;height: 100%"></textarea>
+                </div>
+                <div style="height: 5%;width: 100%"></div>
+            </div>
+
+            <div style="height: 63%;display: none" id="Write">
+                <div style="height: 5%;width: 100%">
+                </div>
+                <div style="height: 9%">
+                    <ul id="menu" >
+                        <li id="Required_field" onclick="f(this)">必选域</li>
+                        <li id="Optional_field" onclick="f(this)">可选域</li>
+                        <li id="Basic_settings" onclick="f(this)">基本设置</li>
+                        <li id="Summary" onclick="f(this)">摘要</li>
+                        <li id="Comment" onclick="f(this)">评论</li>
+                        <li id="BibTex_Source_code" onclick="f(this)">BibTex源码</li>
+                    </ul>
+                </div>
+                <div id="required_field" style="height: 88%">
+                </div>
+                <div id="optional_field" style="height: 88%;display: none">
+                </div>
+                <div id="basic_settings" style="height: 88%;display: none">
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Crossref</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="Crossref" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Keywords</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="Keywords" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>File</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="File" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>DOI</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="DOI" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>URL</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="URL" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Groups</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="Groups" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Comment</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="Comment" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Owner</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="Owner" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                    <div style="height: 12%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Timestamp</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <input id="Timestamp" type="text" style="width: 100%;height: 100%">
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                </div>
+                <div id="summary" style="height: 88%;display: none">
+                    <div style="height: 90%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Abstract</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <textarea id="Abstract" type="text" style="width: 100%;height: 100%"></textarea>
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                </div>
+                <div id="comment" style="height: 88%;display: none">
+                    <div style="height: 90%">
+                        <div class="col-xs-1" style="height: 100%">
+                            <span>Review</span>
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <textarea id="Review" type="text" style="width: 100%;height: 100%"></textarea>
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                </div>
+                <div id="bibtex_source_code" style="height: 88%;display: none">
+                    <div style="height: 90%">
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                        <div class="col-xs-10" style="height: 100%">
+                            <textarea id="bibtexcode" style="width: 100%;height: 100%"></textarea>
+                        </div>
+                        <div class="col-xs-1" style="height: 100%">
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 2%;width: 100%"></div>
+            </div>
+            <div style="height: 12%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-9" style="height: 60%"></div>
+                <div class="col-xs-3" style="height: 60%">
+                    <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="提交" onclick="submit()">
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+            <div style="height: 12%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-3" style="height: 60%"></div>
+                <div class="col-xs-6" style="height: 60%">
+                    <form style="height: 100%" method='post' target="nm_iframe" enctype='multipart/form-data' action="{{url_for('add')}}">
+                        <div class="col-xs-6" style="height: 100%">
+                            <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="file" name="file" onclick="upload()">
+                            <textarea style="display: none" type="text" id="mytext" name="mytext"></textarea>
+                        </div>
+                        <div class="col-xs-6" style="height: 100%">
+                            <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="submit" value="上传" >
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-3" style="height: 60%">
+                    <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="继续添加" onclick="continues()">
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+</div>
+
+<iframe id="nm_iframe" name="nm_iframe" style="display:none;"></iframe>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					选择记录类型
+				</h4>
+			</div>
+			<div class="modal-body" style="height: 300px">
+                <div style="height: 20%">
+				    <div class="col-xs-4" style="height: 100%;">
+                        <input type="button" value="Article" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="InBook" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="Book" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                </div>
+                <div style="height: 20%">
+				    <div class="col-xs-4" style="height: 100%;">
+                        <input type="button" value="Booklet" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="InCollection" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="Conference" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                </div>
+                <div style="height: 20%">
+				    <div class="col-xs-4" style="height: 100%;">
+                        <input type="button" value="InProceedings" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="Proceedings" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="Manual" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                </div>
+                <div style="height: 20%">
+				    <div class="col-xs-4" style="height: 100%;">
+                        <input type="button" value="MasterThesis" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="PhdThesis" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="TechReport" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                </div>
+                <div style="height: 20%">
+				    <div class="col-xs-4" style="height: 100%;">
+                        <input type="button" value="Unpublished" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                        <input type="button" value="Misc" style="width: 100%;height: 80%" onclick="p(this)">
+                    </div>
+                    <div class="col-xs-4" style="height: 100%">
+                    </div>
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<!--<button type="button" class="btn btn-primary">
+					提交更改
+				</button>-->
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myconfirm">
+					您提交的论文文章名疑似重复,确认是否继续提交?
+				</h4>
+			</div>
+			<div id="show" class="modal-body" style="height: 300px">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" onclick="ConfirmSubmit()">
+					继续提交
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',1*windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+            $('#circle1').css('height',0.05*windowHeight + "px");
+            $('#circle1').css('width',0.05*windowHeight+ "px");
+            $('#circle2').css('height',0.05*windowHeight + "px");
+            $('#circle2').css('width',0.05*windowHeight+ "px");
+            $('#circle3').css('height',0.05*windowHeight + "px");
+            $('#circle3').css('width',0.05*windowHeight+ "px");
+            $('#circle4').css('height',0.05*windowHeight + "px");
+            $('#circle4').css('width',0.05*windowHeight+ "px");
+            $('#circle5').css('height',0.05*windowHeight + "px");
+            $('#circle5').css('width',0.05*windowHeight+ "px");
+        }
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+	});
+    var isCopy=true;
+    //复制
+    function copy() {
+        //alert("复制")
+        isCopy = true;
+        document.getElementById('copy').style.display = 'block';
+        document.getElementById('Write').style.display = 'none';
+    }
+    var confirm=0;//初始未确认时,confirm为0,如果发现重复,并且确认提交,就要变为1
+    var SelectType = "";
+    var bibtexkey = '';
+    var type=['Article','InBook','Book','Booklet','InCollection','Conference','InProceedings','Proceedings','Manual','MasterThesis','PhdThesis','TechReport','Unpublished','Misc'];
+    function f(e) {
+       // var option=['required_field','optional_field','abandoned_fields','basic_settings','summary','comment','related_articles','bibtex_source_code'];
+        var option=['required_field','optional_field','basic_settings','summary','comment','bibtex_source_code'];
+        var temp = e.id.toLowerCase();
+        for(var i =0;i<option.length;i++){
+            if(option[i]==temp){
+                document.getElementById(option[i]).style.display='block';
+            }
+            else{
+                document.getElementById(option[i]).style.display='none';
+            }
+        }
+        getText();
+    }
+    var required_field_num=0;
+    var optional_field_num=0;
+    var required_field=[];
+    var optional_field=[];
+    //Write
+    function p(e) {
+        removeDiv();
+        isCopy=false;
+        document.getElementById('copy').style.display='none';
+        SelectType = e.value;
+        console.log(SelectType);
+        if(SelectType=='Article'){
+            required_field = ['Author','Title','Journal','Year','Bibtexkey'];
+            optional_field = ['Volume','Number','Pages','Month','ISSN','Note'];
+        }
+        else if(SelectType=='InBook'){
+            required_field = ['Chapter','Pages','Title','Publisher','Year','Author','Editor','Bibtexkey'];
+            optional_field = ['Volume','Number','Series','Type','Address','Edition','Month','ISBN','Note'];
+        }
+        else if(SelectType=='Book'){
+            required_field = ['Title','Publisher','Year','Author','Editor','Bibtexkey'];
+            optional_field = ['Volume','Number','Series','Address','Edition','Month','ISBN','Note'];
+        }
+        else if(SelectType=='Booklet'){
+            required_field = ['Title','Bibtexkey'];
+            optional_field = ['Author','Howpublished','Address','Month','Year','Note'];
+        }
+        else if(SelectType=='InCollection'){
+            required_field = ['Author','Title','Booktitle','Publisher','Year','Bibtexkey'];
+            optional_field = ['Editor','Volume','Number','Series','Type','Chapter','Pages','Address','Edition','Month','ISBN','Note'];
+        }
+        else if(SelectType=='Conference'){
+            required_field = ['Author','Title','Booktitle','Year','Bibtexkey'];
+            optional_field = ['Editor','Volume','Number','Series','Pages','Address','Month','Organization','Publisher','Note'];
+        }
+        else if(SelectType=='InProceedings'){
+            required_field = ['Author','Title','Booktitle','Year','Bibtexkey'];
+            optional_field = ['Editor','Volume','Number','Series','Pages','Address','Month','Organization','Publisher','Note'];
+        }
+        else if(SelectType=='Proceedings'){
+            required_field = ['Title','Year','Bibtexkey'];
+            optional_field = ['Editor','Volume','Number','Series','Address','Publisher','Month','Organization','ISBN','Note'];
+        }
+        else if(SelectType=='Manual'){
+            required_field = ['Title','Bibtexkey'];
+            optional_field = ['Author','Organization','Address','Edition','Month','Year','ISBN','Note'];
+        }
+        else if(SelectType=='MasterThesis'){
+            required_field = ['Author','Title','School','Year','Bibtexkey'];
+            optional_field = ['Type','Address','Month','Note'];
+        }
+        else if(SelectType=='PhdThesis'){
+            required_field = ['Author','Title','School','Year','Bibtexkey'];
+            optional_field = ['Type','Address','Month','Note'];
+        }
+        else if(SelectType=='TechReport'){
+            required_field = ['Author','Title','Institution','Year','Bibtexkey'];
+            optional_field = ['Type','Number','Address','Month','Note'];
+        }
+        else if(SelectType=='Unpublished'){
+            required_field = ['Author','Title','Note','Bibtexkey'];
+            optional_field = ['Month','Year'];
+        }
+        else if(SelectType=='Misc'){
+            required_field = ['Bibtexkey'];
+            optional_field = ['Author','Title','Howpublished','Month','Year','Note'];
+        }
+        required_field_num=required_field.length;
+        optional_field_num=optional_field.length;
+        for(var i=0;i<required_field.length;i++){
+            var div = document.getElementById("required_field");
+            var div2 = document.createElement("div");
+            div2.setAttribute('id','num'+i);
+            div.appendChild(div2);
+            document.getElementById('num'+i).style.height=(100.0/required_field.length)+'%';
+            var divleft = document.createElement("div");
+            divleft.setAttribute('id','left'+i);
+            div2.appendChild(divleft);
+            document.getElementById('left'+i).setAttribute('class','col-xs-1');
+            document.getElementById('left'+i).style.height='100%';
+            var span = document.createElement("span");
+            span.setAttribute('id','text'+i);
+            divleft.appendChild(span);
+            document.getElementById('text'+i).innerText=required_field[i];
+            var divright = document.createElement("div");
+            divright.setAttribute('id','right'+i);
+            div2.appendChild(divright);
+            document.getElementById('right'+i).setAttribute('class','col-xs-11');
+            document.getElementById('right'+i).style.height='100%';
+            var input = document.createElement("input");
+            input.setAttribute('id',required_field[i]);
+            divright.appendChild(input);
+            document.getElementById(required_field[i]).style.height='100%';
+            document.getElementById(required_field[i]).style.width='100%';
+        }
+        for(var i=0;i<optional_field.length;i++){
+            var div_s = document.getElementById("optional_field");
+            var div2_s = document.createElement("div");
+            div2_s.setAttribute('id','num_s'+i);
+            div_s.appendChild(div2_s);
+            document.getElementById('num_s'+i).style.height=(100.0/optional_field.length)+'%';
+            var divleft_s = document.createElement("div");
+            divleft_s.setAttribute('id','left_s'+i);
+            div2_s.appendChild(divleft_s);
+            document.getElementById('left_s'+i).setAttribute('class','col-xs-1');
+            document.getElementById('left_s'+i).style.height='100%';
+            var span_s = document.createElement("span");
+            span_s.setAttribute('id','text_s'+i);
+            divleft_s.appendChild(span_s);
+            document.getElementById('text_s'+i).innerText=optional_field[i];
+            var divright_s = document.createElement("div");
+            divright_s.setAttribute('id','right_s'+i);
+            div2_s.appendChild(divright_s);
+            document.getElementById('right_s'+i).setAttribute('class','col-xs-11');
+            document.getElementById('right_s'+i).style.height='100%';
+            var input_s = document.createElement("input");
+            input_s.setAttribute('id',optional_field[i]);
+            divright_s.appendChild(input_s);
+            document.getElementById(optional_field[i]).style.height='100%';
+            document.getElementById(optional_field[i]).style.width='100%';
+        }
+        document.getElementById("Write").style.display='block';
+        $('#myModal').modal('hide');
+    }
+
+    //上传
+    function upload() {
+        document.getElementById("mytext").value=bibtexkey;
+    }
+
+    function removeDiv(){
+        for(var i=0;i<required_field_num;i++){
+            document.getElementById("num"+i).parentNode.removeChild(document.getElementById("num"+i));
+        }
+        for(var i=0;i<optional_field_num;i++){
+            document.getElementById("num_s"+i).parentNode.removeChild(document.getElementById("num_s"+i));
+        }
+        document.getElementById('Abstract').value='';
+        document.getElementById('Crossref').value='';
+        document.getElementById('Keywords').value='';
+        document.getElementById('File').value='';
+        document.getElementById('DOI').value='';
+        document.getElementById('URL').value='';
+        document.getElementById('Groups').value='';
+        document.getElementById('Comment').value='';
+        document.getElementById('Owner').value='';
+        document.getElementById('Timestamp').value='';
+        document.getElementById('Review').value='';
+        document.getElementById('bibtexcode').value='';
+    }
+
+    function getText() {
+        var text='\n@'+SelectType+'{'+document.getElementById(required_field[required_field.length-1]).value+',' ;
+        for(var i =0;i<required_field.length-1;i++){
+            if(document.getElementById(required_field[i]).value!=''){
+                text=text+'\n  '+required_field[i].toLowerCase()+' = {'+document.getElementById(required_field[i]).value+'},';
+            }
+        }
+        for(var i =0;i<optional_field.length;i++){
+            if(document.getElementById(optional_field[i]).value!=''){
+                text=text+'\n  '+optional_field[i].toLowerCase()+' = {'+document.getElementById(optional_field[i]).value+'},';
+            }
+        }
+        //摘要部分
+        if(document.getElementById('Abstract').value!=''){
+            text=text+'\n  abstract = {'+document.getElementById('Abstract').value+'},';
+        }
+        //基本设置部分
+        if(document.getElementById('Crossref').value!=''){
+            text=text+'\n  crossref = {'+document.getElementById('Crossref').value+'},';
+        }
+        if(document.getElementById('Keywords').value!=''){
+            text=text+'\n  keywords = {'+document.getElementById('Keywords').value+'},';
+        }
+        if(document.getElementById('File').value!=''){
+            text=text+'\n  file = {'+document.getElementById('File').value+'},';
+        }
+        if(document.getElementById('DOI').value!=''){
+            text=text+'\n  doi = {'+document.getElementById('DOI').value+'},';
+        }
+        if(document.getElementById('URL').value!=''){
+            text=text+'\n  url = {'+document.getElementById('URL').value+'},';
+        }
+        if(document.getElementById('Groups').value!=''){
+            text=text+'\n  groups = {'+document.getElementById('Groups').value+'},';
+        }
+        if(document.getElementById('Comment').value!=''){
+            text=text+'\n  comment = {'+document.getElementById('Comment').value+'},';
+        }
+        if(document.getElementById('Owner').value!=''){
+            text=text+'\n  owner = {'+document.getElementById('Owner').value+'},';
+        }
+        if(document.getElementById('Timestamp').value!=''){
+            text=text+'\n  timestamp = {'+document.getElementById('Timestamp').value+'},';
+        }
+        //评论部分
+        if(document.getElementById('Review').value!=''){
+            text=text+'\n  review = {'+document.getElementById('Review').value+'},';
+        }
+        text=text+'\n}\n';
+        document.getElementById('bibtexcode').value=text;
+        //document.getElementById("mytext").value=text;
+        return text;
+    }
+
+    //提交
+    function submit() {
+        var text='';
+        if(isCopy){
+            text=document.getElementById("bibtexcopy").value;
+        }
+        //手动填写，需要进行bibtex的生成
+        else{
+            text=getText();
+        }
+        $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/addbibtex', {
+          		text: text,
+                confirm: confirm
+        	}, function (data) {
+                if(data[0]=='1'){
+                    for(var i=0;i<data[1].length;i++){
+                        var div = document.getElementById("show");
+                        var div2 = document.createElement("div");
+                        div2.setAttribute('id','repeat'+i);
+                        div.appendChild(div2);
+                        document.getElementById('repeat'+i).style.height='80px';
+                        document.getElementById('repeat'+i).style.borderBottom='1px solid #eee';
+                        var span = document.createElement("span");
+                        span.setAttribute('id','repeattext'+i);
+                        div2.appendChild(span);
+                        document.getElementById('repeattext'+i).innerText=data[1][i];
+                    }
+
+                    $('#confirm').modal('show');
+                    //alert('您提交的论文文章名疑似重复')
+                }
+                else{
+                    bibtexkey=data;
+                    console.log(data)
+                    alert('提交成功!');
+                }
+
+		    });
+    }
+    //确认提交
+    function ConfirmSubmit() {
+        $('#confirm').modal('hide');
+        confirm=1;
+        var text='';
+        if(isCopy){
+            text=document.getElementById("bibtexcopy").value;
+            text=text+'\n';
+        }
+        //手动填写，需要进行bibtex的生成
+        else{
+            text=getText();
+        }
+        $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/addbibtex', {
+          		text: text,
+                confirm: confirm
+        	}, function (data) {
+                if(data[0]=='1'){
+                    for(var i=0;i<data[1].length;i++){
+                        var div = document.getElementById("show");
+                        var div2 = document.createElement("div");
+                        div2.setAttribute('id','repeat'+i);
+                        div.appendChild(div2);
+                        document.getElementById('repeat'+i).style.height='80px';
+                        document.getElementById('repeat'+i).style.borderBottom='1px solid #eee';
+                        var span = document.createElement("span");
+                        span.setAttribute('id','repeattext'+i);
+                        div2.appendChild(span);
+                        document.getElementById('repeattext'+i).innerText=data[1][i];
+                    }
+                    $('#confirm').modal('show');
+                }
+                else if(data=='2'){
+                    confirm=0;
+                    alert('Bibtexkey不能重复，请重新选择Bibtexkey');
+                }
+                else{
+                    bibtexkey=data;
+                    console.log(data)
+                    confirm=0;
+                    alert('提交成功!');
+                }
+
+		    });
+    }
+    $('#nm_iframe').on('load',function(){
+        var text=$(this).contents().find("body").text();
+       // 根据后台返回值处理结果
+        if(text!=''){
+            var j=$.parseJSON(text);
+        console.log(j);
+        if(j=='0'){
+            alert('上传成功');
+        }
+        else if(j==null){
+
+        }
+        else{
+            alert('上传失败');
+        }
+        }
+
+    });
+    function continues(){
+        window.location.href='editbibtex';
+    }
+</script>
+</body>
+</html>

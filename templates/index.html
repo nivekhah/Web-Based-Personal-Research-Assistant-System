@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>个人科研助理系统</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.2.1.slim.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+    <style type="text/css">
+        .searchinput{
+	        border-right-width: 0px;
+	        padding-left: 3px;
+	        width: 250px;
+	        font-family: arial;
+	        float: left;
+	        border-top-width: 0px;
+	        border-bottom-width: 0px;
+	        color: #636365;
+	        margin-left: 4px;
+	        font-size: 12pt;
+	        vertical-align: middle;
+	        border-left-width: 0px;
+	        margin-right: 3px;
+        }
+        .tab_search{
+	        border-bottom: #cccccc 1px solid;
+	        border-left: #cccccc 1px solid;
+	        height: 35px;
+	        border-top: #cccccc 1px solid;
+	        border-right: #cccccc 1px solid;
+        }
+        .searchaction{
+	        width: 21px;
+	        float: left;
+	        height: 17px;
+        }
+    </style>
+</head>
+<body>
+<script src="../static/jquery-1.4.2.min.js"></script>
+<div id="main_div">
+    <div style="height: 40px;background-color: #0099cc">
+        <a style="position: absolute;top: 10px;right: 75px" onclick="window.location.href='login'">登陆</a>
+        <a style="position: absolute;top: 10px;right: 40px" onclick="window.location.href='register'">注册</a>
+        <a style="position: absolute;top: 10px;right: 5px" onclick="window.location.href='logout'">登出</a>
+        <a id="create" style="display: none;position: absolute;top: 10px;right: 110px"></a>
+        <a id="table" style="display: none;position: absolute;top: 10px;right: 200px" onclick="window.location.href='table'">生成论文报表</a>
+    </div>
+    <div style="height: 20px"></div>
+    <div style="height: 100px">
+        <div class="col-xs-4" style="height: 100%"></div>
+        <div class="col-xs-6" style="height: 100%">
+            <img style="height: 100px;" src="../static/logo.png">
+            <span style="font-size: 2.5em; height: 50%; color: #0099cc;font-weight: bold;position: absolute;top: 25px;">个人科研管理</span>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <!--<div style="height: 200px">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div class="col-xs-8" style="height: 100%;box-shadow: 0 0 16px 0 rgba(154,168,180,.3);"></div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>-->
+    <div style="height: 20px"></div>
+    <div id="g" style="height: 130px"></div>
+    <table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_search">
+        <tr>
+            <td>
+                <input type="text" name="q" title="Search" class="searchinput" id="searchinput" size="10"/>
+            </td>
+            <td>
+                <input type="image" class="searchaction" onclick="Search()" alt="Search" src="../static/magglass.gif" />
+            </td>
+        </tr>
+    </table>
+    <div style="height: 20px;">
+
+    </div>
+    <div id="m">
+        <div class="col-xs-3" style="height: 100%"></div>
+        <div id="showerea" class="col-xs-6" style="height: 100%"></div>
+        <div class="col-xs-3" style="height: 100%"></div>
+    </div>
+    <div style="height: 100px;">
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var number = 0;
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+        }
+        var is_authenticated="{{ is_authenticated }}";
+        var number = "{{ number }}"
+        //alert(is_authenticated);
+        if(is_authenticated=='True'){
+            document.getElementById('create').style.display='block';
+            document.getElementById('table').style.display='block';
+            if(number==0){
+                document.getElementById('create').href='pageone';
+                document.getElementById('create').innerText='创建个人主页';
+            }
+            else{
+                document.getElementById('create').href='editpeople';
+                document.getElementById('create').innerText='查看个人主页';
+            }
+        }
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+	});
+    var domainName = new Array();
+    function Search() {
+        removeDiv();
+        document.getElementById('g').style.display='none';
+        var keyvalue=document.getElementById('searchinput').value;
+        //console.log(keyvalue)
+        $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/search', {
+          		keyvalue: keyvalue
+        	}, function (data) {
+                console.log(data);
+                //console.log(data.length);
+
+                number = data.length;
+                document.getElementById("m").style.height=(130*number+10)+'px';
+                for(var i=0;i<number;i++){
+                    domainName[i]= data[i][4];
+                    var pid= 'p'+i;
+                    var div = document.getElementById("showerea");
+
+                    var div2 = document.createElement("div");
+                    div2.setAttribute('id',pid);
+                    div.appendChild(div2);
+                    document.getElementById(pid).style.height='120px';
+                    document.getElementById(pid).style.border="1px solid #ccc";
+                    var bObj=document.getElementById(pid);
+                    var domain = data[i][4];
+                    //document.getElementById(pid).setAttribute('href','http://'+window.location.host+'/people/'+domain)
+                    bObj.onclick=function(){
+                        jump(this);
+                        //da
+                    };
+                    var div3 = document.createElement("div");
+                    var div4 = document.createElement("div");
+                    div3.setAttribute('id',pid+'left');
+                    div4.setAttribute('id',pid+'right');
+
+                    div2.appendChild(div3);
+                    div2.appendChild(div4);
+
+                    document.getElementById(pid+'left').className='col-xs-3';
+                    document.getElementById(pid+'left').style.height='120px';
+
+                    document.getElementById(pid+'right').className='col-xs-9';
+                    document.getElementById(pid+'right').style.height='120px';
+
+                    var img =document.createElement('img');
+                    img.setAttribute('id','img'+i);
+                    div3.appendChild(img);
+                    document.getElementById('img'+i).style.height='114px';
+                    document.getElementById('img'+i).style.width='114px';
+                    document.getElementById('img'+i).style.borderRadius= '57px';
+                    document.getElementById('img'+i).src=data[i][10];
+
+
+
+                    var p = document.createElement('p');
+                    p.setAttribute('id','name'+i);
+                    div4.appendChild(p);
+                    document.getElementById('name'+i).style.fontSize='18px';
+                    document.getElementById('name'+i).style.fontWeight='bold';
+                    document.getElementById('name'+i).innerText=data[i][0]+'  '+data[i][1];
+
+                    var p1 = document.createElement('p');
+                    p1.setAttribute('id','position'+i);
+                    div4.appendChild(p1);
+                    document.getElementById('position'+i).style.fontSize='14px';
+                    document.getElementById('position'+i).innerText=data[i][7]+'  '+data[i][8]+' ' + data[i][9];
+
+                    var p2 = document.createElement('p');
+                    p2.setAttribute('id','interest'+i);
+                    div4.appendChild(p2);
+                    document.getElementById('interest'+i).style.fontSize='14px';
+                    document.getElementById('interest'+i).innerText=data[i][5];
+
+                    var p3 = document.createElement('p');
+                    p3.setAttribute('id','email'+i);
+                    div4.appendChild(p3);
+                    document.getElementById('email'+i).style.fontSize='14px';
+                    document.getElementById('email'+i).innerText='Email : '+data[i][2];
+
+                    var k = document.createElement('div');
+                    k.setAttribute('id','k'+i);
+                    div.appendChild(k);
+                    document.getElementById('k'+i).style.height='10px';
+                    /*var hrefid='href'+i;
+                    var div = document.getElementById("hhhh");
+                    var a =document.createElement('a');
+                    a.setAttribute('id',hrefid);
+                    div.appendChild(a);
+                    document.getElementById(hrefid).innerText=data[i][0]+' '+data[i][2]+' '+data[i][3]+' '+data[i][4];
+                    document.getElementById(hrefid).setAttribute('href','http://'+window.location.host+'/people/'+data[i][1]);
+                    document.getElementById(hrefid).target='_Blank';
+                    var br = document.createElement('br');
+                    br.setAttribute('id','br'+i);
+                    div.appendChild(br);*/
+                }
+		    });
+    }
+    //回车绑定
+   document.onkeydown=function(e){
+       var a=e||window.event;//加这个火狐下不会报 event is  undefind
+       if (a.keyCode == 13){
+           Search();
+           //document.getElementById("Button").click();
+           return false;
+       }
+   }
+   function removeDiv(){
+        for(var i=0;i<number;i++){
+            document.getElementById("href"+i).parentNode.removeChild(document.getElementById("href"+i));
+        }
+   }
+   function jump(e) {
+       window.open('http://'+window.location.host+'/people/'+domainName[Number(e.getAttribute('id').replace('p',''))]);
+   }
+</script>
+</body>
+
+</html>

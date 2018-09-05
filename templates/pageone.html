@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建主页-基本信息</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.2.1.slim.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+</head>
+<body>
+<script src="../static/jquery-1.4.2.min.js"></script>
+<div id="main_div">
+    <div id="menu" style="height: 4%;width: 100%;background-color: #0099cc" >
+
+    </div>
+    <div id="choose" style="height: 15%;width: 100%;background-color: #ffffff">
+        <div class="col-xs-2" style="height: 100%">
+        </div>
+        <div class="col-xs-8" style="height: 100%">
+            <div class="col-xs-2" style="height: 100%;top: 45%">
+                <span >1.创建个人主页</span>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle1" style="background-color:#edf4ff; border-radius:25px;border: 3px red solid" >
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle2" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle3" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle4" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+            <div class="col-xs-2" style="height: 100%;top: 40%">
+                <div id="circle5" style="background-color:#dbe2ed; border-radius:25px;border: 1px #b3b8c2 solid">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <div style="height: 80%;width: 100%;">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div class="col-xs-8" style="height: 100%;border: 1px #b3b8c2 solid">
+            <div style="height: 15%;width: 100%;border-bottom: 1px solid #eee;">
+                <div class="col-xs-2" style="height: 100%;"></div>
+                <div class="col-xs-10" style="height: 100%;" >
+                    <div style="height: 30%"></div>
+                    <span style="font-size: 30px;font-weight: bold">创建个人学术主页</span>
+                </div>
+            </div>
+            <div style="height: 8%;">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-6" style="height: 60%">
+                    <input id="realname" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);">
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 15%">
+                    <span>请填写您的真实姓名</span>
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+            <div style="height: 8%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-6" style="height: 60%">
+                    <input id="EnglishRealname" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);">
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 15%">
+                    <span>您的姓名拼音，即为英文论文使用的名字</span>
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+            <div style="height: 8%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-6" style="height: 60%;">
+                    <!--<div style="height: 100%;top: 15%" class="col-xs-5">
+
+                    </div>
+                    <div style="height: 100%;" class="col-xs-7">
+                        <input id="email" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);">
+                    </div>-->
+
+                    <input id="email" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);">
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 15%">
+                    <span>您的电子邮箱是什么？</span>
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+            <div style="height: 8%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-6" style="height: 60%">
+                    <span id="url" style="float:left;padding-top: 6px;"></span>
+                    <input id="domainName" style="float:right;height: 100%;width: 50%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);">
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 15%">
+                    <span>请设置访问您主页的URL</span>
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+            <div style="height: 8%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-6" style="height: 60%">
+                    <input id="researchInterest" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);">
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 15%">
+                    <span>请输入您的研究兴趣</span>
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+            </div>
+            <div style="height: 20%">
+                <div style="height: 10%;width: 100%"></div>
+                <div class="col-xs-6" style="height: 80%">
+                    <textarea id="myself" maxlength=150 style="height: 100%;width: 100%;">
+                    </textarea>
+		    <h6>说点什么吧，您可以输入<span>150</span>个字，现在剩余<span id="word">150</span>个</h6>
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 35%">
+                    <span>我会这样向别人介绍自己</span>
+                </div>
+                <div style="height: 10%;width: 100%"></div>
+            </div>
+            <div style="height: 4%"></div>
+            <div style="height: 10%">
+                <div style="height: 20%;width: 100%"></div>
+                <div class="col-xs-1" style="height: 60%">
+                </div>
+                <div class="col-xs-4" style="height: 60%">
+                    <input style="height: 100%;width: 100%;;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="下一步" onclick="next()">
+                </div>
+                <div class="col-xs-6" style="height: 60%;top: 15%">
+                </div>
+                <div style="height: 20%;width: 100%"></div>
+
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',1.3*windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+            $('#circle1').css('height',0.05*windowHeight + "px");
+            $('#circle1').css('width',0.05*windowHeight+ "px");
+            $('#circle2').css('height',0.05*windowHeight + "px");
+            $('#circle2').css('width',0.05*windowHeight+ "px");
+            $('#circle3').css('height',0.05*windowHeight + "px");
+            $('#circle3').css('width',0.05*windowHeight+ "px");
+            $('#circle4').css('height',0.05*windowHeight + "px");
+            $('#circle4').css('width',0.05*windowHeight+ "px");
+            $('#circle5').css('height',0.05*windowHeight + "px");
+            $('#circle5').css('width',0.05*windowHeight+ "px");
+        }
+        document.getElementById('url').innerText=window.location.host+'/people/';
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+        document.getElementById("myself").value = '';
+	});
+    //点击下一步，先将首页的数据提交到后台，然后进行页面的跳转
+    function next() {
+        //跳转到页面二
+        var realname = document.getElementById("realname").value;
+        var EnglishRealname = document.getElementById("EnglishRealname").value;
+        var email = document.getElementById("email").value;
+        //var researchField = document.getElementById("researchField").value;
+        var domainName = document.getElementById("domainName").value;
+        var researchInterest = document.getElementById("researchInterest").value;
+        var myself = document.getElementById("myself").value;
+        if(realname==''){
+            alert("请输入真实姓名");
+            return;
+        }
+        if(EnglishRealname==''){
+            alert("请输入姓名拼音");
+            return;
+        }
+        if(email==''){
+            alert("请输入电子邮件");
+            return;
+        }
+        /*if(researchField==''){
+            alert("请输入研究领域");
+            return;
+        }*/
+        if(domainName==''){
+            alert("请输入域名");
+            return;
+        }
+        if(researchInterest==''){
+            alert("请输入研究域名");
+            return;
+        }
+        if(myself==''){
+            alert("请输入自我介绍");
+            return;
+        }
+        $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/pageoneInfo', {
+          		realname: realname,
+            	EnglishRealname: EnglishRealname,
+                email: email,
+                //researchField: researchField,
+                domainName: domainName,
+                researchInterest: researchInterest,
+                myself: myself
+        	}, function (data) {
+                if(data=='0'){
+                    window.location.href='pagetwo';
+                }
+                if(data=='1'){
+                    alert('域名已存在,请重新选择');
+                    document.getElementById("domainName").value='';
+                }
+		    });
+        //window.location.href='pagetwo';
+    }
+ $(function(){
+  $("#myself").keyup(function(){
+   var len = $(this).val().length;
+   if(len > 149){
+    $(this).val($(this).val().substring(0,150));
+   }
+   var num = 150 - len;
+   $("#word").text(num);
+  });
+ });
+</script>
+</body>
+</html>

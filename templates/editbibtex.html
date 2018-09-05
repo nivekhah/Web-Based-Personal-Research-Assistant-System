@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑个人主页信息</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.2.1.slim.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+</head>
+<body>
+<script src="../static/jquery-1.4.2.min.js"></script>
+<div id="main_div">
+    <div id="menu" style="height: 30px;width: 100%;background-color: #0099cc;position: fixed;z-index: 1000;top: 0;" >
+        <a style="position: absolute;top: 3px;right: 5px" onclick="window.location.href='/'">Home</a>
+    </div>
+    <div style="height: 5px;width: 100%;position: fixed;background-color: #ffffff;z-index: 1000;top: 30px;"></div>
+    <div style="height: 60px;width: 100%;text-align: center;background-color: #ffffff;position: fixed;top: 35px;z-index: 1000">
+        <span style="font-size: 40px;font-weight: bold;text-align: center">个人文献修改</span>
+    </div>
+    <div style="height: 5px;width: 100%;position: fixed;background-color: #ffffff;z-index: 1000;top: 95px;"></div>
+    <div style="height: 70px;width: 100%;position: fixed;top: 100px;z-index: 1000;background-color: #ffffff">
+        <div class="col-xs-2" style="height: 100%;"></div>
+        <div class="col-xs-8" style="height: 80%;">
+            <div style="height: 10px"></div>
+            <div class="col-xs-3" style="height: 60px"></div>
+            <div class="col-xs-3" style="height: 40px">
+                <input style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" onclick="save()" value="保存">
+            </div>
+            <div class="col-xs-3" style="height: 40px">
+                <input style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" onclick="back()" value="返回">
+            </div>
+            <div class="col-xs-3" style="height: 60px"></div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <div id="main" style="height: 1200px;width: 100%;z-index: 1000;margin-top : 180px">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div  class="col-xs-8" style="height: 100%;border: 1px #b3b8c2 solid;">
+            <div style="height: 10px;">
+            </div>
+            <div style="height: 20px"></div>
+            <div id="add" style="height: 120px;">
+                <div class="col-xs-2" style="height: 100%;"></div>
+                <div class="col-xs-8" style="height: 80%;border:1px solid #ccc;text-align: center">
+                    <div style="height: 30px"></div>
+                    <img style="text-align: center;height: 40px;width: 40px" src="../static/add.png" onclick="add()">
+                </div>
+                <div class="col-xs-2" style="height: 100%"></div>
+            </div>
+
+            <div id="maintext"></div>
+
+
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <div style="height: 30px"></div>
+</div>
+<script type="text/javascript">
+    var num=0;
+    var mylist=new Array();
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',1*windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+        }
+        var texts={{ text|tojson }};
+        var keylist={{ keylist|tojson }};
+        console.log(keylist);
+        mylist=keylist;
+        var textNum=texts.length;
+        num=textNum;
+        //console.log(textNum);
+        document.getElementById("main").style.height=(textNum*120+150)+"px";
+        for(var i=0;i<textNum;i++){
+            var lid = 'l'+(i+1);
+            var textid='text'+(i+1);
+            var deleteid='delete'+(i+1)
+
+            var div = document.getElementById("maintext");
+            var div2 = document.createElement("div");
+            div2.setAttribute('id',lid);
+            div.appendChild(div2);
+
+
+            var div3 = document.createElement("div");
+            var div4 = document.createElement("div");
+            var div5 = document.createElement("div");
+            div3.setAttribute('id',lid+'left');
+            div4.setAttribute('id',lid+'center');
+            div5.setAttribute('id',lid+'right');
+
+            div2.appendChild(div3);
+            div2.appendChild(div4);
+            div2.appendChild(div5);
+
+            document.getElementById(lid+'left').className='col-xs-2';
+            document.getElementById(lid+'left').style.height='120px';
+            document.getElementById(lid+'center').className='col-xs-8';
+            document.getElementById(lid+'center').style.height='100px';
+            document.getElementById(lid+'center').style.border="1px solid #ccc";
+            document.getElementById(lid+'right').className='col-xs-2';
+            document.getElementById(lid+'right').style.height='120px';
+            document.getElementById(lid).style.height='120px';
+            var span = document.createElement("span");
+            span.setAttribute('id',textid);
+            div4.appendChild(span);
+            var span1 = document.createElement("span");
+            span1.setAttribute('id','notext'+(i+1));
+            div4.appendChild(span1);
+            var a = document.createElement('a');
+            div4.appendChild(a);
+            a.setAttribute('id',deleteid);
+            document.getElementById(deleteid).innerText='x';
+            document.getElementById(deleteid).style.position='absolute';
+            document.getElementById(deleteid).style.right='7px';
+            document.getElementById(deleteid).style.top='1px';
+            //document.getElementById(deleteid).onclick=Delete(this);
+            a.onclick=function(){
+                Delete(this);
+            };
+            document.getElementById(textid).innerText=texts[i];
+            document.getElementById('notext'+(i+1)).innerText=keylist[i];
+            document.getElementById('notext'+(i+1)).style.display='none';
+        }
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+	});
+    function Delete(e) {
+        console.log(e.getAttribute('id').replace('delete',''));
+        var number=e.getAttribute('id').replace('delete','');
+        var whichkey=document.getElementById('notext'+Number(number)).innerText;
+        console.log(whichkey)
+        for(var i=Number(number);i<num;i++){
+            var textid1='text'+i;
+            var textid2='text'+(i+1);
+            document.getElementById(textid1).innerText=document.getElementById(textid2).innerText;
+
+            document.getElementById('notext'+i).innerText=document.getElementById('notext'+(i+1)).innerText;
+
+        }
+        console.log(mylist)
+        mylist.removeByValue(whichkey);
+        console.log(mylist);
+        document.getElementById("main").style.height=((num+1)*120-60)+"px";
+        document.getElementById('l'+num).style.display='none';
+        num--;
+        console.log(num);
+    }
+    Array.prototype.removeByValue = function(val) {
+        for(var i=0; i<this.length; i++) {
+            if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+            }
+        }
+    };
+    function add() {
+        window.location.href='add';
+    }
+    function back() {
+        window.location.href='editpeople';
+    }
+    function save() {
+        console.log(mylist);
+        $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/savebibtex', {
+                mylist: JSON.stringify(mylist)
+        	}, function (data) {
+                if(data=='0'){
+                   // window.location.href='pagetwo';
+                    alert("保存成功");
+                }
+		    });
+    }
+
+</script>
+</body>
+</html>

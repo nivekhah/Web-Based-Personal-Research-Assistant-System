@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.2.1.slim.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+</head>
+<body>
+<script src="../static/jquery-1.4.2.min.js"></script>
+<div id="main_div">
+    <div id="menu" style="height: 4%;width: 100%;background-color: #0099cc" ></div>
+    <div id="choose" style="height: 2%;width: 100%;background-color: #ffffff"></div>
+    <div id="main" style="height: 620px;width: 100%;">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div id="maintext" class="col-xs-8" style="height: 100%;border: 1px #b3b8c2 solid">
+            <div style="height: 300px;width: 100%;border-bottom: 1px solid #eee;">
+                <div class="col-xs-3" style="height: 100%;">
+                    <div style="height: 5px"></div>
+
+                    <img style="width: 190px;height: 190px;border-radius: 95px" id="ProfilePicture" src="">
+                    <div style="height: 35px"></div>
+
+                    <div>
+                        <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电子邮箱:</span>
+                    </div>
+                    <div>
+                        <span id="email" style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                </div>
+                <div class="col-xs-9" style="height: 100%;" >
+                    <div style="height: 5px">
+                    </div>
+                    <div style="height: 56px;background-color: #b3b8c2">
+                        <span id="name" style="font-size: 40px;font-weight: bold"></span>
+                    </div>
+                    <div style="height: 3px"></div>
+                    <div>
+                        <span id="work" style="font-size: 16px;"></span>
+                    </div>
+                    <div>
+                        <span id="researchinterest" style="font-size: 16px;">fdsfdsf</span>
+                    </div>
+                    <div style="height: 15px"></div>
+                    <div style="background-color: #b3b8c2;height: 40px">
+                        <span style="font-size: 25px;font-weight: bold">个人简介</span>
+                    </div>
+                    <div style="height: 15px;"></div>
+                    <div>
+                        <span id="myself" style="font-size: 15px"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <div style="height: 30px"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',1*windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+            $('#circle1').css('height',0.05*windowHeight + "px");
+            $('#circle1').css('width',0.05*windowHeight+ "px");
+            $('#circle2').css('height',0.05*windowHeight + "px");
+            $('#circle2').css('width',0.05*windowHeight+ "px");
+            $('#circle3').css('height',0.05*windowHeight + "px");
+            $('#circle3').css('width',0.05*windowHeight+ "px");
+            $('#circle4').css('height',0.05*windowHeight + "px");
+            $('#circle4').css('width',0.05*windowHeight+ "px");
+            $('#circle5').css('height',0.05*windowHeight + "px");
+            $('#circle5').css('width',0.05*windowHeight+ "px");
+        }
+        var ProfilePicturePath = "{{ ProfilePicturePath }}";
+        var realname="{{ realname }}";
+        var EnglishRealname = "{{ EnglishRealname }}";
+        var Research_institutions = "{{ Research_institutions }}";
+        var department = "{{ department }}";
+        var position = "{{ position }}";
+        var researchInterest="{{ researchInterest }}";
+        var myself="{{ myself }}";
+        var email="{{ email }}";
+        var texts={{ text|tojson }};
+        var paths={{ path|tojson }};
+        var textNum=texts.length;
+        var name={{ name|tojson }};
+        var keys={{ keys|tojson }};
+        var username="{{ username }}";
+        //console.log(paths);
+               if(textNum<4){
+
+        }
+        else{
+            document.getElementById("main").style.height=(600+(textNum-4)*80+20)+"px";
+        }
+        document.getElementById("ProfilePicture").src="../"+ProfilePicturePath;
+        document.getElementById("name").innerText=realname+" "+EnglishRealname;
+        document.getElementById("work").innerText=' '+Research_institutions+' '+department+' '+position;
+        document.getElementById("researchinterest").innerText="研究兴趣: "+researchInterest;
+        document.getElementById("myself").innerText=myself;
+        document.getElementById("email").innerText=document.getElementById("email").innerText+email;
+        for(var i=0;i<textNum;i++){
+            var pid= 'p'+(i+1);
+            var textid='text'+(i+1);
+            var hrefid='href'+(i+1);
+            var div = document.getElementById("maintext");
+
+            var div2 = document.createElement("div");
+            div2.setAttribute('id',pid);
+            div.appendChild(div2);
+            document.getElementById(pid).style.height='80px';
+            document.getElementById(pid).style.borderBottom='1px solid #eee';
+            var span = document.createElement("span");
+            span.setAttribute('id',textid);
+            div2.appendChild(span);
+            //var br =document.createElement('br');
+            //div2.appendChild(br);
+            var img =document.createElement('img');
+            img.setAttribute('id','img'+i);
+            div2.appendChild(img);
+            document.getElementById('img'+i).src='../static/icon_pdf.gif';
+            var a =document.createElement('a');
+            a.setAttribute('id',hrefid);
+            div2.appendChild(a);
+
+            var key= keys[i].replace(/:/g, '_');
+            key= key.replace(/\//g, '_');
+            document.getElementById(pid).style.display="block";
+            document.getElementById(textid).innerText=texts[i];
+            var path=paths[i];
+            //console.log(window.location.host);
+            //console.log(path)
+            if(path==null){
+                //document.getElementById(hrefid).innerText= 'No PDF has been uploaded yet';
+                document.getElementById('img'+i).style.display='none';
+            }
+            else {
+                var inpObj = document.getElementById('img'+i);
+                inpObj.onclick = function(ev){
+                    //alert(" success ~ ");
+                    console.log(ev.target.id);
+                    console.log(keys);
+                    console.log(ev.target.id.split('img')[1]);
+                    var x = ev.target.id.split('img')[1]
+                    var key= keys[x].replace(/:/g, '_');
+                    var key= key.replace(/\//g, '_');
+                    window.location.href='http://'+window.location.host+'/download/'+username+'/'+key;
+                }
+                //document.getElementById('add'+i).style.display='none';
+                //document.getElementById(hrefid).setAttribute('href','http://'+window.location.host+'/download/'+username+'/'+key);
+               /* var temp=name[i];
+                temp=Trim(temp);
+                //console.log(temp)
+                if(temp.charAt(temp.length-1)=='.'){
+                   // console.log('d')
+                    document.getElementById(hrefid).innerText=temp+'pdf';
+                }
+                else {
+                    document.getElementById(hrefid).innerText=temp+'.pdf';
+                }*/
+            }
+        }
+
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+	});
+    function Trim(str) {
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑个人主页信息</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="../static/jquery-3.2.1.slim.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+</head>
+<body>
+<script src="../static/jquery-1.4.2.min.js"></script>
+<div id="main_div">
+    <div id="menu" style="height: 4%;width: 100%;background-color: #0099cc" >
+        <a style="position: absolute;top: 3px;right: 5px" onclick="javascript:window.location.href='/'">Home</a>
+    </div>
+    <div id="choose" style="height: 5%;width: 100%;background-color: #ffffff"></div>
+    <div id="main" style="height: 750px;width: 100%;">
+        <div class="col-xs-2" style="height: 100%"></div>
+        <div  class="col-xs-8" style="height: 100%;border: 1px #b3b8c2 solid">
+            <div style="height: 10px">
+            </div>
+            <div style="height: 70px;text-align: center">
+                <span style="font-size: 40px;font-weight: bold;text-align: center">个人科研主页资料修改</span>
+            </div>
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">真实名字</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="realname" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">姓名拼音</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="EnglishRealname" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">电子邮件</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="email" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">域名</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="domainName" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">研究兴趣</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="researchInterest" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">研究机构</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="Research_institutions" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">工作部门</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="department" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 35px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">职位</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <input id="position" style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="text">
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 5px"></div>
+
+
+            <div style="height: 5px"></div>
+            <div style="height: 150px">
+                <div class="col-xs-4" style="height: 100%">
+                    <span style="float:right;line-height:35px">自我介绍</span>
+                </div>
+                <div class="col-xs-5" style="height: 100%">
+                    <textarea id="myself" maxlength=150 style="height: 100%;width: 100%;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);"></textarea>
+<h6>说点什么吧，您可以输入<span>150</span>个字，现在剩余<span id="word">150</span>个</h6>
+                </div>
+                <div class="col-xs-3" style="height: 100%">
+                </div>
+            </div>
+            <div style="height: 35px;border-bottom: 1px solid #eee;"></div>
+
+            <div style="height: 20px"></div>
+
+            <div id="maintext"></div>
+
+
+<!--            <div id="add" style="height: 120px;">
+                <div class="col-xs-2" style="height: 100%;"></div>
+                <div class="col-xs-8" style="height: 80%;border:1px solid #ccc;text-align: center">
+                    <div style="height: 30px"></div>
+                    <img style="text-align: center;height: 40px;width: 40px" src="../static/add.png" onclick="add()">
+                </div>
+                <div class="col-xs-2" style="height: 100%"></div>
+            </div>-->
+
+
+            <div style="height: 120px;">
+                <div class="col-xs-2" style="height: 100%;"></div>
+                <div class="col-xs-8" style="height: 80%;">
+                    <div style="height: 30px"></div>
+                    <div class="col-xs-3" style="height: 60px"></div>
+                    <div class="col-xs-3" style="height: 40px">
+                        <input style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" onclick="save()" value="保存">
+                    </div>
+                    <div class="col-xs-3" style="height: 40px">
+                        <input style="height: 100%;width: 100%;background-color: #0099cc;border: 0;border-radius: 3px;box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.15);" type="button" value="返回" onclick="back()">
+                    </div>
+                    <div class="col-xs-3" style="height: 60px"></div>
+                </div>
+                <div class="col-xs-2" style="height: 100%"></div>
+            </div>
+        </div>
+        <div class="col-xs-2" style="height: 100%"></div>
+    </div>
+    <div style="height: 30px"></div>
+</div>
+<script type="text/javascript">
+    var num=0;
+    var mylist=new Array();
+    $(document).ready(function(){
+        function setHeight(){
+            var windowHeight = document.documentElement.clientHeight;
+            var windowWidth = document.documentElement.clientWidth;
+            $('#main_div').css('height',windowHeight + "px");
+            $('#main_div').css('width',windowWidth+ "px");
+        }
+        var ProfilePicturePath = "{{ ProfilePicturePath }}";
+        var realname="{{ realname }}";
+        var EnglishRealname = "{{ EnglishRealname }}";
+        var domainName="{{ domainName }}";
+        var Research_institutions = "{{ Research_institutions }}";
+        var department = "{{ department }}";
+        var position = "{{ position }}";
+        var researchInterest="{{ researchInterest }}";
+        var myself="{{ myself }}";
+        var email="{{ email }}";
+        var texts={{ text|tojson }};
+        var keylist={{ keylist|tojson }};
+        mylist=keylist;
+        var textNum=texts.length;
+        num=textNum;
+        document.getElementById('realname').value=realname;
+        document.getElementById('EnglishRealname').value=EnglishRealname;
+        document.getElementById('Research_institutions').value=Research_institutions;
+        document.getElementById('department').value=department;
+        document.getElementById('position').value=position;
+        document.getElementById('domainName').value=domainName;
+        document.getElementById('researchInterest').value=researchInterest;
+        document.getElementById('email').value=email;
+        document.getElementById('myself').value=myself;
+	var len = document.getElementById('myself').value.length;
+	console.log(len);
+	$("#word").text(150-len);
+        //console.log(textNum);
+        /*document.getElementById("main").style.height=(600+textNum*120+290)+"px";
+        for(var i=0;i<textNum;i++){
+            var lid = 'l'+(i+1);
+            var textid='text'+(i+1);
+            var deleteid='delete'+(i+1)
+
+            var div = document.getElementById("maintext");
+            var div2 = document.createElement("div");
+            div2.setAttribute('id',lid);
+            div.appendChild(div2);
+
+
+            var div3 = document.createElement("div");
+            var div4 = document.createElement("div");
+            var div5 = document.createElement("div");
+            div3.setAttribute('id',lid+'left');
+            div4.setAttribute('id',lid+'center');
+            div5.setAttribute('id',lid+'right');
+
+            div2.appendChild(div3);
+            div2.appendChild(div4);
+            div2.appendChild(div5);
+
+            document.getElementById(lid+'left').className='col-xs-2';
+            document.getElementById(lid+'left').style.height='120px';
+            document.getElementById(lid+'center').className='col-xs-8';
+            document.getElementById(lid+'center').style.height='100px';
+            document.getElementById(lid+'center').style.border="1px solid #ccc";
+            document.getElementById(lid+'right').className='col-xs-2';
+            document.getElementById(lid+'right').style.height='120px';
+            document.getElementById(lid).style.height='120px';
+            var span = document.createElement("span");
+            span.setAttribute('id',textid);
+            div4.appendChild(span);
+            var span1 = document.createElement("span");
+            span1.setAttribute('id','notext'+(i+1));
+            div4.appendChild(span1);
+            var a = document.createElement('a');
+            div4.appendChild(a);
+            a.setAttribute('id',deleteid);
+            document.getElementById(deleteid).innerText='x';
+            document.getElementById(deleteid).style.position='absolute';
+            document.getElementById(deleteid).style.right='7px';
+            document.getElementById(deleteid).style.top='1px';
+            //document.getElementById(deleteid).onclick=Delete(this);
+            a.onclick=function(){
+                Delete(this);
+            };
+            document.getElementById(textid).innerText=texts[i];
+            document.getElementById('notext'+(i+1)).innerText=keylist[i];
+        }*/
+        setHeight();
+        $(window).resize(function() {
+            setHeight();
+        });
+	});
+    function Delete(e) {
+        console.log(e.getAttribute('id').replace('delete',''));
+        var number=e.getAttribute('id').replace('delete','');
+        var whichkey=document.getElementById('notext'+Number(number)).innerText;
+        console.log(whichkey)
+        for(var i=Number(number);i<num;i++){
+            var textid1='text'+i;
+            var textid2='text'+(i+1);
+            document.getElementById(textid1).innerText=document.getElementById(textid2).innerText;
+
+            document.getElementById('notext'+i).innerText=document.getElementById('notext'+(i+1)).innerText;
+
+        }
+        console.log(mylist)
+        mylist.removeByValue(whichkey);
+        console.log(mylist);
+        document.getElementById("main").style.height=(600+(num+1)*120+50)+"px";
+        document.getElementById('l'+num).style.display='none';
+        num--;
+        console.log(num);
+    }
+    Array.prototype.removeByValue = function(val) {
+        for(var i=0; i<this.length; i++) {
+            if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+            }
+        }
+    };
+    function add() {
+        window.location.href='add';
+    }
+    function back() {
+        window.location.href='editpeople';
+    }
+    function save() {
+        var realname = document.getElementById('realname').value;
+        var EnglishRealname = document.getElementById('EnglishRealname').value;
+        var Research_institutions = document.getElementById('Research_institutions').value;
+        var department = document.getElementById('department').value;
+        var position = document.getElementById('position').value;
+        var domainName = document.getElementById('domainName').value;
+        var researchInterest = document.getElementById('researchInterest').value;
+        var email = document.getElementById('email').value;
+        var myself = document.getElementById('myself').value;
+        if(realname==''){
+            alert("请输入真实姓名");
+            return;
+        }
+        if(EnglishRealname==''){
+            alert("请输入姓名拼音");
+            return;
+        }
+        if(email==''){
+            alert("请输入电子邮件");
+            return;
+        }
+        if(Research_institutions==''){
+            alert("请输入研究机构");
+            return;
+        }
+        if(department==''){
+            alert("请输入工作部门");
+            return;
+        }
+        if(position==''){
+            alert("请输入职位");
+            return;
+        }
+        if(domainName==''){
+            alert("请输入域名");
+            return;
+        }
+        if(researchInterest==''){
+            alert("请输入研究域名");
+            return;
+        }
+        if(myself==''){
+            alert("请输入自我介绍");
+            return;
+        }
+        console.log(mylist);
+        $SCRIPT_ROOT={{request.script_root|tojson|safe}}
+            $.getJSON($SCRIPT_ROOT+'/save', {
+          		realname: realname,
+            	EnglishRealname: EnglishRealname,
+                email: email,
+                Research_institutions: Research_institutions,
+                department: department,
+                position:position,
+                domainName: domainName,
+                researchInterest: researchInterest,
+                myself: myself,
+                //mylist: JSON.stringify(mylist)
+        	}, function (data) {
+                if(data=='0'){
+                   // window.location.href='pagetwo';
+                    alert("保存成功");
+                }
+		    });
+    }
+ $(function(){
+  $("#myself").keyup(function(){
+   var len = $(this).val().length;
+   if(len > 149){
+    $(this).val($(this).val().substring(0,150));
+   }
+   var num = 150 - len;
+   $("#word").text(num);
+  });
+ });
+
+</script>
+</body>
+</html>
